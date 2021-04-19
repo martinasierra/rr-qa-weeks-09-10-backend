@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const port = 4000;
-const users = require('./Users');
 
 app.use(cors());
 app.use(express.json());
@@ -24,17 +23,18 @@ else {
 }
 });
 
-/*/ Login
+// Login
 app.put('/login', (req, res) => {
-  const updateUser = req.body;
-  users.forEach(user => {
-    if (user.mail === parseInt(req.params.mail)) {
-
-    }
-  });
-  
-  res.json({result: 'Login has been succesfull'})
-}) */
+  const updateUser =  {
+    email: req.body.email,
+    password: req.body.password
+  }
+  if (updateUser.email && updateUser.password) {
+    return res.json({result: 'Login has been succesfull'});
+  }
+  else  
+  return res.status(400).json({ msg: 'No user with that information'});
+}) 
 
 
 app.listen(port, () => {
