@@ -7,6 +7,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+let users = [
+  {
+      "email":'',
+      "fullName": '',
+      "password":'',
+  }
+]
 
 //Register
 app.post('/register', (req, res) => {
@@ -16,10 +23,12 @@ app.post('/register', (req, res) => {
     password:req.body.password,
   };
   if (!newUser.email || !newUser.fullName || !newUser.password) {
-    return res.status(400).json({ msg: 'Please include a name, email and password'});
+    res.status(400).json({ msg: 'Please include a name, email and password'});
 }
 else {
-    return res.json({result: 'Registration has been successful'});
+    users.push(newUser);
+    res.json({result: 'Registration has been successful'},
+    );
 }
 });
 
