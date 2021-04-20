@@ -38,7 +38,7 @@ app.put('/login', (req, res) => {
     email: req.body.email,
     password: req.body.password
   }
-  if (updateUser.email && updateUser.password) {
+  if ((updateUser.email == newUser.email) && (updateUser.password == newUser.password)) {
     return res.json({result: 'Login has been succesfull'});
   }
   else  
