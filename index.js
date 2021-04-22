@@ -9,9 +9,9 @@ app.use(express.urlencoded({ extended: false }));
 
 let users = [
   {
-      "email":'',
-      "fullName": '',
-      "password":'',
+    "email":'',
+    "fullName": '',
+    "password":''
   }
 ]
 
@@ -32,20 +32,28 @@ else {
 }
 });
 
+/* buscar al usuario en el array "users" en el cual guardaste al del register.
+const newUser =  users.find((user )=> user.email === updateUser.email && user.password == updateUser.password); */
 // Login
 app.put('/login', (req, res) => {
+
   const updateUser =  {
     email: req.body.email,
     password: req.body.password
   }
-  if ((updateUser.email == newUser.email) && (updateUser.password == newUser.password)) {
-    return res.json({result: 'Login has been succesfull'});
-  }
-  else  
+
+  const newUser =  users.find((user) => user.email === updateUser.email && user.password === updateUser.password);   
+   
+ if (newUser) {
+  return res.json({result: 'Login has been succesfull'});
+ }
+ else {
   return res.status(400).json({ msg: 'No user with that information'});
-}) 
+ }
+  
 
+  })
 
-app.listen(port, () => {
+    app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
