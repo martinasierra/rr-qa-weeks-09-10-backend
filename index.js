@@ -32,8 +32,6 @@ else {
 }
 });
 
-/* buscar al usuario en el array "users" en el cual guardaste al del register.
-const newUser =  users.find((user )=> user.email === updateUser.email && user.password == updateUser.password); */
 // Login
 app.put('/login', (req, res) => {
 
@@ -41,18 +39,14 @@ app.put('/login', (req, res) => {
     email: req.body.email,
     password: req.body.password
   }
-
   const newUser =  users.find((user) => user.email === updateUser.email && user.password === updateUser.password);   
-   
  if (newUser) {
   return res.json({result: 'Login has been succesfull'});
- }
- else {
-  return res.status(400).json({ msg: 'No user with that information'});
- }
-  
+  } else {
+  return res.status(400).json({ msg: 'No user with that information'}); 
+  }  
+})
 
-  })
 
     app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
